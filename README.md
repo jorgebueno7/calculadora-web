@@ -23,7 +23,7 @@ y podremos acceder a nuestro navegador web e introducir la dirección: `http://l
 
 [🇬🇧] Web application made in Python, using Flask as a web framework.
 In order to implement this application, we will need:
-- Web navigator
+- Web browser
 - Have Python3 installed on our PC
 - Install Flask
 ---
