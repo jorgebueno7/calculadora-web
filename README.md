@@ -19,7 +19,6 @@ python3 app.py
 ```
 y podremos acceder a nuestro navegador web e introducir la dirección: `http://localhost:5000` y disfrutar de la calculadora web.
 ---
----
 
 [🇬🇧] Web application made in Python, using Flask as a web framework.
 In order to implement this application, we will need:
