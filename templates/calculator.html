@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #calculator {
+            width: 300px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #screen {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: text;
+        }
+
+        button {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        button.operator {
+            background-color: #f0f0f0;
+        }
+
+        button.equal {
+            background-color: #6cbf6c;
+            color: #fff;
+        }
+
+        button.clear {
+            background-color: #ff6f6f;
+            color: #fff;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+    <h1>Calculator</h1>
+    <div id="calculator">
+        <div id="screen" contenteditable="true"></div>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class="operator">/</button>
+        <br>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button class="operator">*</button>
+        <br>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button class="operator">-</button>
+        <br>
+        <button>0</button>
+        <button class="operator">.</button>
+        <button class="equal">=</button>
+        <button class="operator clear">C</button>
+        <button class="operator">+</button>
+    </div>
+    <script>
+        $(document).ready(function() {
+            var screen = $('#screen');
+            var currentInput = '';
+
+            screen.keypress(function(event) {
+                var key = String.fromCharCode(event.which);
+                if (/[\d.+\-*/]/.test(key)) {
+                    if (currentInput.includes('=')) {
+                        currentInput = key;
+                        screen.text(currentInput);
+                    } else {
+                        currentInput += key;
+                        screen.text(currentInput);
+                    }
+                    return false;
+                } else if (event.which === 13) { // Tecla "Enter"
+                    try {
+                        currentInput = eval(currentInput);
+                        screen.text(currentInput);
+                    } catch (error) {
+                        screen.text('Error');
+                    }
+                    return false;
+                }
+            });
+
+            $('button').click(function() {
+                var buttonText = $(this).text();
+
+                if (buttonText === '=') {
+                    try {
+                        currentInput = eval(currentInput);
+                        screen.text(currentInput);
+                    } catch (error) {
+                        screen.text('Error');
+                    }
+                } else if (buttonText === 'C') {
+                    currentInput = '';
+                    screen.text('');
+                } else {
+                    if (currentInput.includes('=')) {
+                        currentInput = buttonText;
+                        screen.text(currentInput);
+                    } else {
+                        currentInput += buttonText;
+                        screen.text(currentInput);
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
